@@ -15,6 +15,9 @@ public:
     bool autoload() const;
     void setAutoload(bool autoload);
 
+    void classBegin() override;
+    void componentComplete() override;
+
 signals:
     void autoloadChanged();
 

@@ -19,6 +19,14 @@ QList<QObject*> SearchPagePresenter::model() const
 }
 
 
+void SearchPagePresenter::onCreate(QQuickItem * view, const QVariantMap & args)
+{
+    Q_UNUSED(view);
+
+    searchUsecase_ = args[QStringLiteral("usecase")].value<UserSearchUsecasePtr>();
+}
+
+
 void SearchPagePresenter::selectItem(int index)
 {
     if (index >= collection_.size())

@@ -27,6 +27,11 @@ Page::~Page()
 void Page::classBegin()
 {
     Container::classBegin();
+
+    QQmlProperty presenterProperty(this, QStringLiteral("presenter"));
+    qDebug() << "presenter property typename: " << presenterProperty.propertyTypeName();
+    qDebug() << "is writable: " << presenterProperty.isWritable();
+    qDebug() << "is valid: " << presenterProperty.isValid();
 }
 
 

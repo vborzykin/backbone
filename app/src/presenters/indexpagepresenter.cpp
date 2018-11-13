@@ -4,11 +4,14 @@
 #include <QtCore/QVariant>
 #include <QtQml/QQmlEngine>
 #include <QtQuick/QQuickItem>
+#include <usecases/usersearchusecase.h>
 
 
 IndexPagePresenter::IndexPagePresenter(QObject * parent)
     : Backbone::PagePresenter(parent)
 {
+    usecase_ = std::make_shared<UserSearchUsecase>();
+
     setObjectName(QStringLiteral("IndexPagePresenter object"));
 }
 
@@ -42,11 +45,14 @@ void IndexPagePresenter::searchByText(QString pattern)
 {
     Q_UNUSED(pattern);
 
-    if (!router)
+    if (!router || !usecase_)
         return;
 
+    usecase_->search(pattern);
+
     QVariantMap args;
-    args.insert(QStringLiteral("pattern"), pattern);
+    args.insert(QStringLiteral("pattern"), std::move(pattern));
+    args.insert(QStringLiteral("usecase"), QVariant::fromValue(usecase_));
 
     router->push("qrc:///qml/search.qml", std::move(args));
 }
@@ -56,7 +62,6 @@ void IndexPagePresenter::collect()
 {
     if (engine_)
     {
-        qDebug() << "collect garbage";
         engine_->collectGarbage();
     }
 }

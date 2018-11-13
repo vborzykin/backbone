@@ -1,8 +1,10 @@
 #pragma once
-#include <backbone/pagepresenter.h>
-#include <QtCore/QObject>
 #include <QtCore/QList>
+#include <QtCore/QObject>
+
+#include <backbone/pagepresenter.h>
 #include <entities/branch.h>
+#include <usecases/usersearchusecase.h>
 
 
 using DataCollection = QList<Branch*>;
@@ -17,6 +19,8 @@ class SearchPagePresenter
 public:
     SearchPagePresenter();
 
+    void onCreate(QQuickItem * view, const QVariantMap & args) override;
+
     QList<QObject*> model() const;
 
 public slots:
@@ -24,4 +28,5 @@ public slots:
 
 private:
     QList<QObject*> collection_;
+    UserSearchUsecasePtr searchUsecase_;
 };

@@ -1,4 +1,7 @@
 #include <backbone/block.h>
+#include <QtQml/QQmlEngine>
+#include <QtQml/QQmlProperty>
+#include <QtCore/QDebug>
 
 
 namespace Backbone {
@@ -17,6 +20,35 @@ void Block::setAutoload(bool autoload)
         autoload_ = autoload;
         emit autoloadChanged();
     }
+}
+
+
+void Block::classBegin()
+{
+    Container::classBegin();
+
+    QQmlProperty presenterProperty(this, QStringLiteral("presenter"));
+    qDebug() << "begin block presenter: " << presenterProperty.propertyTypeName();
+    qDebug() << "is writable " << presenterProperty.isWritable();
+    qDebug() << "is valid" << presenterProperty.isValid();
+}
+
+
+void Block::componentComplete()
+{
+    Container::componentComplete();
+
+    // TODO: get page
+    // TODO: get PagePresenter
+
+    QQmlEngine * engine = qmlEngine(this);
+    Q_UNUSED(engine);
+
+
+    QQmlProperty presenterProperty(this, QStringLiteral("presenter"));
+    qDebug() << "component complete block presenter: " << presenterProperty.propertyTypeName();
+    qDebug() << "is writable " << presenterProperty.isWritable();
+    qDebug() << "is valid" << presenterProperty.isValid();
 }
 
 

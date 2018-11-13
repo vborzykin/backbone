@@ -2,6 +2,8 @@ project(TestApp)
 
 
 add_executable(${PROJECT_NAME}
+    src/entities/entity.cpp
+    src/entities/entity.h
     src/entities/branch.cpp
     src/entities/branch.h
     src/entities/corecontext.cpp

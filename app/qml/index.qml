@@ -6,6 +6,7 @@ import App.Presenters 1.0
 
 
 Backbone.Page { // container
+
     Rectangle { // view
         property IndexPagePresenter presenter;
 
@@ -40,6 +41,28 @@ Backbone.Page { // container
             Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+
+
+                Backbone.Block {
+                    property DetailPagePresenter presenter;
+
+                    property Component delegate: Item {
+
+                        Rectangle {
+                        }
+                    }
+
+                    width: parent.width
+                    height: 100
+                    anchors.bottom: parent.bottom
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "lightblue"
+                    }
+
+
+                }
             }
         }
     }

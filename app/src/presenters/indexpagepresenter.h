@@ -1,5 +1,6 @@
 #pragma once
 #include <backbone/pagepresenter.h>
+#include <usecases/usersearchusecase.h>
 
 
 class IndexPagePresenter
@@ -20,4 +21,6 @@ private slots:
 
 private:
     QQmlEngine * engine_ = nullptr;
+
+    UserSearchUsecasePtr usecase_;
 };
